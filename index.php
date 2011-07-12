@@ -1,3 +1,72 @@
+<?php
+/*** data ***/
+$ua = $_SERVER['HTTP_USER_AGENT'];
+
+$list = array(
+	'Opera' => array(
+		'version' => 11.5,
+		'url' => 'http://www.opera.com',
+		'pre' => 'http://www.opera.com/browser/next'
+	),
+	'Firefox' => array(
+		'version' => 5,
+		'url' => 'http://www.getfirefox.com',
+		'pre' => 'http://www.mozilla.com/firefox/channel'
+	),
+	'Chrome' => array(
+		'version' => 12,
+		'url' => 'http://www.google.com/chrome',
+		'pre' => 'http://www.google.com/landing/chrome/beta'
+	),
+	'Safari' => array(
+		'version' => 5,
+		'url' => 'http://www.apple.com/safari'
+	),
+	'Internet Explorer' => array(
+		'version' => 9,
+		'url' => 'http://www.ie9.com',
+		'pre' => 'http://ie.microsoft.com/testdrive'
+	)
+);
+
+$page = array('OMFG, WTF? No idea what you\'re on.',
+	'You could be cutting edge... Or totally out of date. Go check!');
+
+
+/*** match ***/
+preg_match('/(Opera)\/9\.80.*Version\/(\d\d\.\d\d)/', $ua, $m) ||
+preg_match('/(Opera) (\d\d\.\d\d)/', $ua, $m) ||
+preg_match('/(Opera|Firefox|Chrome)\/(\d\d?\.\d\d?)/', $ua, $m);
+
+if (!$m && preg_match('/Version\/(\d\.\d).*(Safari)/', $ua, $m)) {
+	$m = array($m[0], $m[2], $m[1]);
+}
+
+if (!$m && preg_match('/(MSIE) (\d\d?)/', $ua, $m)) {
+	$m[1] = 'Internet Explorer';
+}
+
+
+/*** handle ***/
+if ($m && isset($list[$m[1]])) {
+	$browser = $m[1];
+	$version = floatval($m[2]);
+	$cur = $list[$browser];
+	$curv = floatval($cur['version']);
+	
+	if ($version < $curv) {
+		$page = array('OMFG, upgrade your f-ing browser!',
+			$browser === 'Internet Explorer' ? 'Stuck with Internet Explorer? Installing <a href="http://www.google.com/chromeframe">Chrome Frame</a> may help decrease the pain.' : '',
+			$browser);
+	} else if ($version === $curv) {
+		$page = array('OMFG, you\'re fine.',
+			$cur['pre'] ? "Want to be in the cool kids club? Go install a <a href='{$cur['pre']}'>prelease</a>!" : "");
+	} else {
+		$page = array('OMFG, double rainbow!',
+			'You\'re using a prelease! As a VIP, enjoy the the privilege of being able to tell everyone else to f-ing upgrade.');
+	}
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -9,12 +78,16 @@
 		
 		a {
 			color: #FFF;
+			color: #555\9;
 			filter: alpha(opacity = 30);
-			float: left;
 			opacity: 0.3;
 			text-decoration: none;
 		}
-		a:hover {
+		body > a {
+			float: left;
+		}
+		a:hover, .highlight {
+			color: #FFF;
 			filter: alpha(opacity = 100);
 			opacity: 1;
 		}
@@ -33,15 +106,24 @@
 			font-size: 48px;
 			margin: 80px;
 		}
+		
+		p {
+			margin-bottom: 50px;
+		}
 		</style>
 	</head>
 	<body>
-		<h1>OMFG, upgrade your f-ing browser!</h1>
+		<?php
+		echo "<h1>{$page[0]}</h1>";
 		
-		<a href="http://www.opera.com"><img src="Opera.png" width="200" height="186"><br>Opera 11.5</a>
-		<a href="http://www.getfirefox.com"><img src="Firefox.png" width="200" height="186"><br>Firefox 5</a>
-		<a href="http://www.google.com/chrome" style="opacity:1"><img src="Chrome.png" width="200" height="186"><br>Chrome 12</a>
-		<a href="http://www.apple.com/safari"><img src="Safari.png" width="200" height="186"><br>Safari 5</a>
-		<a href="http://www.ie9.com"><img src="Internet Explorer.png" width="200" height="186"><br>Internet Explorer 9</a>
+		if ($page[1]) { echo "<p>{$page[1]}</p>"; }
+		
+		if ($page[2]) {
+			foreach ($list as $name => $info) {
+				$class = $name === $page[2] ? "class='highlight'" : "";
+				echo "<a href='{$info['url']}' {$class}><img src='{$name}.png' width='200' height='186'><br>{$name} {$info['version']}</a>";
+			}
+		}
+		?>
 	</body>
 </html>
