@@ -32,6 +32,8 @@ $list = array(
 $page = array('OMFG, WTF? No idea what you\'re on.',
 	'You could be cutting edge... Or totally out of date. Go check!');
 
+$freshness = 'Unknown';
+
 
 /*** match ***/
 preg_match('/(Opera)\/9\.80.*Version\/(\d\d\.\d\d)/', $ua, $m) ||
@@ -55,15 +57,18 @@ if ($m && isset($list[$m[1]])) {
 	$curv = floatval($cur['version']);
 	
 	if ($version < $curv) {
-		$page = array('OMFG, upgrade your f-ing browser!',
-			$browser === 'Internet Explorer' ? 'Stuck with Internet Explorer? Installing <a href="http://www.google.com/chromeframe">Chrome Frame</a> may help decrease the pain.' : '',
+		$page = array('OMFG, upgrade your f-ing browser!', $browser === 'Internet Explorer' ?
+			'Stuck with Internet Explorer? Installing <a href="http://www.google.com/chromeframe">Chrome Frame</a> may help decrease the pain.' : '',
 			$browser);
+		$freshness = 'Outdated';
 	} else if ($version === $curv) {
 		$page = array('OMFG, you\'re fine.',
 			$cur['pre'] ? "Want to be in the cool kids club? Go install a <a href='{$cur['pre']}'>prelease</a>!" : "");
+		$freshness = 'Current';
 	} else {
 		$page = array('OMFG, double rainbow!',
 			'You\'re using a prelease! As a VIP, enjoy the the privilege of being able to tell everyone else to f-ing upgrade.');
+		$freshness = 'Prerelease';
 	}
 }
 ?>
@@ -111,8 +116,21 @@ if ($m && isset($list[$m[1]])) {
 			margin-bottom: 50px;
 		}
 		</style>
+		<!--<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-24512488-1']);
+		_gaq.push(['_setCustomVar', 1, 'Browser Freshness', '<?php echo $freshness; ?>', 1]); 
+		_gaq.push(['_trackPageview']);
+		
+		(function(){
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+		</script>-->
 	</head>
 	<body>
+		<!-- created by @tkazec / source is at https://github.com/tkazec/omfgupgrade -->
 		<?php
 		echo "<h1>{$page[0]}</h1>";
 		
