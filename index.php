@@ -76,6 +76,7 @@ if ($m && isset($list[$m[1]])) {
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
 		<title>OMFG, upgrade!</title>
 		<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans">
 		<style>
@@ -87,9 +88,6 @@ if ($m && isset($list[$m[1]])) {
 			filter: alpha(opacity = 30);
 			opacity: 0.3;
 			text-decoration: none;
-		}
-		body > a {
-			float: left;
 		}
 		a:hover, .highlight {
 			color: #FFF;
@@ -106,14 +104,48 @@ if ($m && isset($list[$m[1]])) {
 			width: 1000px;
 		}
 		
-		h1 {
+		h1, h2 {
 			font-weight: 400;
+		}
+		h1 {
 			font-size: 48px;
 			margin: 80px;
 		}
+		h2 {
+			font-size: 16px;
+		}
 		
-		p {
+		#nav {
+			font-size: 14px;
+			position: absolute;
+			right: 15px;
+			top: 15px;
+		}
+		#nav-link {
+			cursor: pointer;
+			text-align: right;
+		}
+		#nav-content {
+			display: none;
+			text-align: left;
+			width: 200px;
+		}
+		#nav:hover #nav-content {
+			display: block;
+		}
+		#nav-content p {
+			margin-bottom: 15px;
+		}
+		
+		#sub {
 			margin-bottom: 50px;
+		}
+		
+		#list a {
+			background-repeat: no-repeat;
+			float: left;
+			padding-top: 186px;
+			width: 200px;
 		}
 		</style>
 		<!--<script type="text/javascript">
@@ -130,18 +162,40 @@ if ($m && isset($list[$m[1]])) {
 		</script>-->
 	</head>
 	<body>
-		<!-- created by @tkazec / source is at https://github.com/tkazec/omfgupgrade -->
+		<div id="nav">
+			<div id="nav-link">About</div>
+			<div id="nav-content">
+				<h2>What's this?</h2>
+				<p>A site that detects your browser version and offers suggestions based on it.</p>
+				
+				<h2>Who made it?</h2>
+				<p><a href="https://twitter.com/tkazec">@tkazec</a></p>
+				
+				<h2>What does it think I'm on?</h2>
+				<p><?php echo "{$browser} {$version}."; ?></p>
+				
+				<h2>Where's the source?</h2>
+				<p><a href="https://github.com/tkazec/omfgupgrade">GitHub</a>. The browser logos are from <a href="http://paulirish.com/2010/high-res-browser-icons/">Paul Irish</a>.</p>
+				
+				<h2>Okay, but what is this ACTUALLY for?</h2>
+				<p>Sending to people who annoy you by using older browsers.</p>
+			</div>
+		</div>
+		
 		<?php
 		echo "<h1>{$page[0]}</h1>";
 		
-		if ($page[1]) { echo "<p>{$page[1]}</p>"; }
+		if ($page[1]) { echo "<p id='sub'>{$page[1]}</p>"; }
 		
+		echo "<div id='list'>";
 		if ($page[2]) {
 			foreach ($list as $name => $info) {
-				$class = $name === $page[2] ? "class='highlight'" : "";
-				echo "<a href='{$info['url']}' {$class}><img src='{$name}.png' width='200' height='186'><br>{$name} {$info['version']}</a>";
+				$bg = "style='background-image:url(\"{$name}.png\")'";
+				$class = $name === $page[2] ? "class='highlight' " : "";
+				echo "<a href='{$info['url']}' {$class}{$bg}>{$name} {$info['version']}</a>";
 			}
 		}
+		echo "</div>";
 		?>
 	</body>
 </html>
