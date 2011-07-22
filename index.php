@@ -19,7 +19,7 @@ $list = array(
 		'pre' => 'http://www.google.com/landing/chrome/beta'
 	),
 	'Safari' => array(
-		'version' => 5,
+		'version' => 5.1,
 		'url' => 'http://www.apple.com/safari'
 	),
 	'Internet Explorer' => array(
