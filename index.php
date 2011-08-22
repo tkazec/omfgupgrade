@@ -9,7 +9,7 @@ $list = array(
 		'pre' => 'http://www.opera.com/browser/next'
 	),
 	'Firefox' => array(
-		'version' => 5,
+		'version' => 6,
 		'url' => 'http://www.getfirefox.com',
 		'pre' => 'http://www.mozilla.com/firefox/channel'
 	),
@@ -148,9 +148,9 @@ if ($m && isset($list[$m[1]])) {
 			width: 200px;
 		}
 		</style>
-		<!--<script type="text/javascript">
+		<script>
 		var _gaq = _gaq || [];
-		_gaq.push(['_setAccount', 'UA-24512488-1']);
+		_gaq.push(['_setAccount', '##GA##']);
 		_gaq.push(['_setCustomVar', 1, 'Browser Freshness', '<?php echo $freshness; ?>', 1]); 
 		_gaq.push(['_trackPageview']);
 		
@@ -159,7 +159,7 @@ if ($m && isset($list[$m[1]])) {
 			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
 			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 		})();
-		</script>-->
+		</script>
 	</head>
 	<body>
 		<div id="nav">
