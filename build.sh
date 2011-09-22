@@ -1,5 +1,5 @@
 #!/bin/bash
-# usage: bash build.sh containerdir googleanalyticsacc
+# $ bash build.sh containerdir googleanalyticsacc
 
 SRCDIR="$( cd "$( dirname "$0" )" && pwd )"
 OUTDIR="$1/omfgupgrade"
@@ -11,6 +11,7 @@ cd $OUTDIR
 
 rm build.sh
 rm -rf .git
+
 sed -i '' -e "s/##GA##/$GA/" index.php
 
 python - <<EOF

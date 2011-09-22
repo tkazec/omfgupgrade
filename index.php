@@ -4,7 +4,7 @@ $ua = $_SERVER['HTTP_USER_AGENT'];
 
 $list = array(
 	'Opera' => array(
-		'version' => 11.5,
+		'version' => 11.51,
 		'url' => 'http://www.opera.com',
 		'pre' => 'http://www.opera.com/browser/next'
 	),
@@ -14,7 +14,7 @@ $list = array(
 		'pre' => 'http://www.mozilla.com/firefox/channel'
 	),
 	'Chrome' => array(
-		'version' => 13,
+		'version' => 14,
 		'url' => 'http://www.google.com/chrome',
 		'pre' => 'http://www.google.com/landing/chrome/beta'
 	),
@@ -150,9 +150,11 @@ if ($m && isset($list[$m[1]])) {
 		</style>
 		<script>
 		var _gaq = _gaq || [];
-		_gaq.push(['_setAccount', '##GA##']);
-		_gaq.push(['_setCustomVar', 1, 'Browser Freshness', '<?php echo $freshness; ?>', 1]); 
-		_gaq.push(['_trackPageview']);
+		_gaq.push(
+			['_setAccount', '##GA##'],
+			['_setCustomVar', 1, 'Browser Freshness', '<?php echo $freshness; ?>', 1],
+			['_trackPageview']
+		);
 		
 		(function(){
 			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
