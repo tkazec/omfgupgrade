@@ -4,7 +4,7 @@ $ua = $_SERVER['HTTP_USER_AGENT'];
 
 $list = array(
 	'Opera' => array(
-		'version' => 11.51,
+		'version' => 11.52,
 		'url' => 'http://www.opera.com',
 		'pre' => 'http://www.opera.com/browser/next'
 	),
@@ -14,7 +14,7 @@ $list = array(
 		'pre' => 'http://www.mozilla.com/firefox/channel'
 	),
 	'Chrome' => array(
-		'version' => 14,
+		'version' => 15,
 		'url' => 'http://www.google.com/chrome',
 		'pre' => 'http://www.google.com/landing/chrome/beta'
 	),
