@@ -9,7 +9,7 @@ $list = array(
 		'pre' => 'http://www.opera.com/browser/next'
 	),
 	'Firefox' => array(
-		'version' => 7,
+		'version' => 8,
 		'url' => 'http://www.getfirefox.com',
 		'pre' => 'http://www.mozilla.com/firefox/channel'
 	),
