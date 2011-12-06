@@ -4,7 +4,7 @@ $ua = $_SERVER['HTTP_USER_AGENT'];
 
 $list = array(
 	'Opera' => array(
-		'version' => 11.52,
+		'version' => 11.60,
 		'url' => 'http://www.opera.com',
 		'pre' => 'http://www.opera.com/browser/next'
 	),
