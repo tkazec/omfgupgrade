@@ -14,7 +14,7 @@ $list = array(
 		'pre' => 'http://www.mozilla.com/firefox/channel'
 	),
 	'Chrome' => array(
-		'version' => 15,
+		'version' => 16,
 		'url' => 'http://www.google.com/chrome',
 		'pre' => 'http://www.google.com/landing/chrome/beta'
 	),
