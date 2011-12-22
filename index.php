@@ -9,7 +9,7 @@ $list = array(
 		'pre' => 'http://www.opera.com/browser/next'
 	),
 	'Firefox' => array(
-		'version' => 8,
+		'version' => 9,
 		'url' => 'http://www.getfirefox.com',
 		'pre' => 'http://www.mozilla.com/firefox/channel'
 	),
@@ -29,8 +29,10 @@ $list = array(
 	)
 );
 
-$page = array('OMFG, WTF? No idea what you\'re on.',
-	'You could be cutting edge... Or totally out of date. Go check!');
+$page = array(
+	'OMFG, WTF? No idea what you\'re on.',
+	'You could be cutting edge... Or totally out of date. Go check!'
+);
 
 $freshness = 'Unknown';
 
@@ -57,17 +59,26 @@ if ($m && isset($list[$m[1]])) {
 	$curv = floatval($cur['version']);
 	
 	if ($version < $curv) {
-		$page = array('OMFG, upgrade your f-ing browser!', $browser === 'Internet Explorer' ?
-			'Stuck with Internet Explorer? Installing <a href="http://www.google.com/chromeframe">Chrome Frame</a> may help decrease the pain.' : '',
-			$browser);
+		$page = array(
+			'OMFG, upgrade your f-ing browser!',
+			$browser === 'Internet Explorer' ? 'Stuck with Internet Explorer? Installing <a href="http://www.google.com/chromeframe">Chrome Frame</a> may help decrease the pain.' : '',
+			$browser
+		);
+		
 		$freshness = 'Outdated';
 	} else if ($version === $curv) {
-		$page = array('OMFG, you\'re fine.',
-			$cur['pre'] ? "Want to be in the cool kids club? Go install a <a href='{$cur['pre']}'>prelease</a>!" : "");
+		$page = array(
+			'OMFG, you\'re fine.',
+			$cur['pre'] ? "Want to be in the cool kids club? Go install a <a href='{$cur['pre']}'>prelease</a>!" : ""
+		);
+		
 		$freshness = 'Current';
 	} else {
-		$page = array('OMFG, double rainbow!',
-			'You\'re using a prelease! As a VIP, enjoy the the privilege of being able to tell everyone else to f-ing upgrade.');
+		$page = array(
+			'OMFG, double rainbow!',
+			'You\'re using a prelease! As a VIP, enjoy the the privilege of being able to tell everyone else to f-ing upgrade.'
+		);
+		
 		$freshness = 'Prerelease';
 	}
 }
@@ -89,7 +100,7 @@ if ($m && isset($list[$m[1]])) {
 			opacity: 0.3;
 			text-decoration: none;
 		}
-		a:hover, .highlight {
+		a:hover, a:active, .highlight {
 			color: #FFF;
 			filter: alpha(opacity = 100);
 			opacity: 1;
@@ -179,8 +190,8 @@ if ($m && isset($list[$m[1]])) {
 				<h2>Where's the source?</h2>
 				<p><a href="https://github.com/tkazec/omfgupgrade">GitHub</a>. The browser logos are from <a href="http://paulirish.com/2010/high-res-browser-icons/">Paul Irish</a>.</p>
 				
-				<h2>Okay, but what is this ACTUALLY for?</h2>
-				<p>Sending to people who annoy you by using older browsers.</p>
+				<h2>Okay, but what is this really?</h2>
+				<p>A quick and easy way to anger people using older browsers.</p>
 			</div>
 		</div>
 		
