@@ -1,86 +1,47 @@
 <?php
-/*** data ***/
-$ua = $_SERVER['HTTP_USER_AGENT'];
+require('api.php');
 
-$list = array(
-	'Opera' => array(
-		'version' => 11.60,
-		'url' => 'http://www.opera.com',
-		'pre' => 'http://www.opera.com/browser/next'
-	),
-	'Firefox' => array(
-		'version' => 9,
-		'url' => 'http://www.getfirefox.com',
-		'pre' => 'http://www.mozilla.com/firefox/channel'
-	),
-	'Chrome' => array(
-		'version' => 16,
-		'url' => 'http://www.google.com/chrome',
-		'pre' => 'http://www.google.com/landing/chrome/beta'
-	),
-	'Safari' => array(
-		'version' => 5.1,
-		'url' => 'http://www.apple.com/safari'
-	),
-	'Internet Explorer' => array(
-		'version' => 9,
-		'url' => 'http://www.ie9.com',
-		'pre' => 'http://ie.microsoft.com/testdrive'
-	)
-);
+$browser = OMFG::info($_SERVER['HTTP_USER_AGENT']);
+$status = isset($_GET['status']) ? $_GET['status'] : $browser['status'];
 
-$page = array(
-	'OMFG, WTF? No idea what you\'re on.',
-	'You could be cutting edge... Or totally out of date. Go check!'
-);
-
-$freshness = 'Unknown';
-
-
-/*** match ***/
-preg_match('/(Opera)\/9\.80.*Version\/(\d\d\.\d\d)/', $ua, $m) ||
-preg_match('/(Opera) (\d\d\.\d\d)/', $ua, $m) ||
-preg_match('/(Opera|Firefox|Chrome)\/(\d\d?\.\d\d?)/', $ua, $m);
-
-if (!$m && preg_match('/Version\/(\d\.\d).*(Safari)/', $ua, $m)) {
-	$m = array($m[0], $m[2], $m[1]);
-}
-
-if (!$m && preg_match('/(MSIE) (\d\d?)/', $ua, $m)) {
-	$m[1] = 'Internet Explorer';
-}
-
-
-/*** handle ***/
-if ($m && isset($list[$m[1]])) {
-	$browser = $m[1];
-	$version = floatval($m[2]);
-	$cur = $list[$browser];
-	$curv = floatval($cur['version']);
+if ($status === 'old') {
+	$page = array(
+		'OMFG, upgrade your f-ing browser!',
+		$browser['name'] === 'Internet Explorer' ? 'Stuck with Internet Explorer? Installing <a href="http://www.google.com/chromeframe">Chrome Frame</a> may help decrease the pain.' : '',
+		$browser['name']
+	);
 	
-	if ($version < $curv) {
-		$page = array(
-			'OMFG, upgrade your f-ing browser!',
-			$browser === 'Internet Explorer' ? 'Stuck with Internet Explorer? Installing <a href="http://www.google.com/chromeframe">Chrome Frame</a> may help decrease the pain.' : '',
-			$browser
-		);
-		
-		$freshness = 'Outdated';
-	} else if ($version === $curv) {
-		$page = array(
-			'OMFG, you\'re fine.',
-			$cur['pre'] ? "Want to be in the cool kids club? Go install a <a href='{$cur['pre']}'>prelease</a>!" : ""
-		);
-		
-		$freshness = 'Current';
-	} else {
-		$page = array(
-			'OMFG, double rainbow!',
-			'You\'re using a prelease! As a VIP, enjoy the the privilege of being able to tell everyone else to f-ing upgrade.'
-		);
-		
-		$freshness = 'Prerelease';
-	}
+	$freshness = 'Outdated';
+} else if ($status === 'cur') {
+	$pre = OMFG::$list[$browser['name']]['pre'];
+	
+	$page = array(
+		'OMFG, you\'re fine.',
+		$pre ? "Want to be in the cool kids club? Go install a <a href='{$pre}'>prelease</a>!" : ""
+	);
+	
+	$freshness = 'Current';
+} else if ($status === 'pre') {
+	$page = array(
+		'OMFG, double rainbow!',
+		'You\'re using a prelease! As a VIP, enjoy the the privilege of being able to tell everyone else to f-ing upgrade.'
+	);
+	
+	$freshness = 'Prerelease';
+} else if ($status === 'mob') {
+	$page = array(
+		'OMFG, the future!',
+		'You\'re browsing this site with a tiny device—from possibly thousands of miles away—THROUGH THE AIR.<br>Suffice to say, you\'re probably fine.'
+	);
+	
+	$freshness = 'Mobile';
+} else if ($status === 'wtf') {
+	$page = array(
+		'OMFG, WTF? No idea what you\'re on.',
+		'You could be cutting edge... Or totally out of date. Go check!'
+	);
+
+	$freshness = 'Unknown';
 }
 ?>
 <!DOCTYPE html>
@@ -180,7 +141,7 @@ if ($m && isset($list[$m[1]])) {
 				<p><a href="https://twitter.com/tkazec">@tkazec</a></p>
 				
 				<h2>What's it think I'm on?</h2>
-				<p><?php echo "{$browser} {$version}."; ?></p>
+				<p><?php echo "{$browser['name']} {$browser['version']}."; ?></p>
 				
 				<h2>Where's the source?</h2>
 				<p><a href="https://github.com/tkazec/omfgupgrade">GitHub</a>. The browser logos are from <a href="http://paulirish.com/2010/high-res-browser-icons/">Paul Irish</a>.</p>
@@ -200,7 +161,7 @@ if ($m && isset($list[$m[1]])) {
 		if ($page[2]) {
 			echo "<div id='list'>";
 			
-			foreach ($list as $name => $info) {
+			foreach (OMFG::$list as $name => $info) {
 				$bg = "style='background-image:url(\"images/{$name}.png\")'";
 				$class = $name === $page[2] ? "class='highlight' " : "";
 				echo "<a href='{$info['url']}' {$class}{$bg}>{$name} {$info['version']}</a>";
