@@ -159,19 +159,14 @@ if ($m && isset($list[$m[1]])) {
 			width: 200px;
 		}
 		</style>
+		<script src="http://www.google-analytics.com/ga.js" async></script>
 		<script>
 		var _gaq = _gaq || [];
 		_gaq.push(
-			['_setAccount', '##GA##'],
-			['_setCustomVar', 1, 'Browser Freshness', '<?php echo $freshness; ?>', 1],
-			['_trackPageview']
+			["_setAccount", "##GA##"],
+			["_setCustomVar", 1, "Browser Freshness", "<?php echo $freshness; ?>", 1],
+			["_trackPageview"]
 		);
-		
-		(function(){
-			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-		})();
 		</script>
 	</head>
 	<body>
@@ -203,7 +198,7 @@ if ($m && isset($list[$m[1]])) {
 		echo "<div id='list'>";
 		if ($page[2]) {
 			foreach ($list as $name => $info) {
-				$bg = "style='background-image:url(\"{$name}.png\")'";
+				$bg = "style='background-image:url(\"images/{$name}.png\")'";
 				$class = $name === $page[2] ? "class='highlight' " : "";
 				echo "<a href='{$info['url']}' {$class}{$bg}>{$name} {$info['version']}</a>";
 			}
