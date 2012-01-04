@@ -15,7 +15,7 @@ http://omfgupgrade.net?status=<old|cur|pre|mob|wtf>
 **API**<br>
 Send a request to http://omfgupgrade.net/api.json and it'll return info based on the request UA. If you need to use JSONP, just add the `callback` parameter. The response will be an object with the following data:
 
-* `browser`: Browser name.
+* `name`: Browser name.
 * `version`: Browser version, a number in the format `<major>.<minor>` (note: the minor version may be 0 and therefore nonexistent).
 * `status`: One of the following:
 	* `old`: Outdated.

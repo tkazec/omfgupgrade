@@ -1,5 +1,7 @@
-<pre>
 <?php
+require("detect.php");
+
+$total = 0;
 $passed = 0;
 
 $list = array(
@@ -38,32 +40,24 @@ $list = array(
 	)
 );
 
+echo "<pre>";
 foreach ($list as $name => $versions) {
-	foreach ($versions as $v => $ua) {
-		$m = null;
+	foreach ($versions as $ver => $ua) {
+		$browser = OMFG::info($ua);
 		
-		/*** match ***/
-		preg_match('/(Opera)\/9\.80.*Version\/(\d\d\.\d\d)/', $ua, $m) ||
-		preg_match('/(Opera) (\d\d\.\d\d)/', $ua, $m) ||
-		preg_match('/(Opera|Firefox|Chrome)\/(\d\d?\.\d\d?)/', $ua, $m);
-		
-		if (!$m && preg_match('/Version\/(\d\.\d).*(Safari)/', $ua, $m)) {
-			$m = array($m[0], $m[2], $m[1]);
-		}
-		
-		if (!$m && preg_match('/(MSIE) (\d\d?)/', $ua, $m)) {
-			$m[1] = 'Internet Explorer';
-		}
-		/*** /match ***/
-		
-		if (!$m || $m[1] !== $name || floatval($m[2]) !== floatval($v)) {
-			echo "Expected {$name} {$v}, parsed ";
-			print_r($m);
+		if ($browser['name'] !== $name || $browser['version'] !== floatval($ver)) {
+			echo "<strong>{$ua}</strong><br>";
+			echo "Expected <em>{$name} {$ver}</em>, detected ";
+			print_r($browser);
+			echo "<br>";
 		} else {
 			$passed++;
 		}
+		
+		$total++;
 	}
 }
+echo "</pre>";
+
+echo "<p>Passed {$passed} out of {$total} tests!</p>";
 ?>
-</pre>
-<p>Passed <?php echo $passed; ?> tests!</p>
