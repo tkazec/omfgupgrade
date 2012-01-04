@@ -4,14 +4,14 @@ require('api.php');
 $browser = OMFG::info($_SERVER['HTTP_USER_AGENT']);
 $status = isset($_GET['status']) ? $_GET['status'] : $browser['status'];
 
+$freshness = OMFG::$freshness[$status];
+
 if ($status === 'old') {
 	$page = array(
 		'OMFG, upgrade your f-ing browser!',
 		$browser['name'] === 'Internet Explorer' ? 'Stuck with Internet Explorer? Installing <a href="http://www.google.com/chromeframe">Chrome Frame</a> may help decrease the pain.' : '',
 		$browser['name']
 	);
-	
-	$freshness = 'Outdated';
 } else if ($status === 'cur') {
 	$pre = OMFG::$list[$browser['name']]['pre'];
 	
@@ -19,8 +19,6 @@ if ($status === 'old') {
 		'OMFG, you\'re fine.',
 		$pre ? "Want to be in the cool kids club? Go install a <a href='{$pre}'>prelease</a>!" : ""
 	);
-	
-	$freshness = 'Current';
 } else if ($status === 'pre') {
 	$page = array(
 		'OMFG, double rainbow!',
@@ -33,15 +31,11 @@ if ($status === 'old') {
 		'OMFG, the future!',
 		'You\'re browsing this site with a tiny device—from possibly thousands of miles away—THROUGH THE AIR.<br>Suffice to say, you\'re probably fine.'
 	);
-	
-	$freshness = 'Mobile';
 } else if ($status === 'wtf') {
 	$page = array(
 		'OMFG, WTF? No idea what you\'re on.',
 		'You could be cutting edge... Or totally out of date. Go check!'
 	);
-
-	$freshness = 'Unknown';
 }
 ?>
 <!DOCTYPE html>

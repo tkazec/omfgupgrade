@@ -13,6 +13,7 @@ rm build.sh
 rm -rf .git
 
 sed -i '' -e "s/##GA##/$GA/" index.php
+sed -i '' -e "s/UA--/$GA/" json.php
 
 python - <<EOF
 import re, subprocess

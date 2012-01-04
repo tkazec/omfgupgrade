@@ -1,5 +1,13 @@
 <?php
 class OMFG {
+	public static $freshness = array(
+		'old' => 'Outdated',
+		'cur' => 'Current',
+		'pre' => 'Prerelease',
+		'mob' => 'Mobile',
+		'wtf' => 'Unknown'
+	);
+	
 	public static $list = array(
 		'Opera' => array(
 			'version' => 11.60,
