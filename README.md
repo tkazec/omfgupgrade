@@ -21,7 +21,7 @@ Send a request to http://omfgupgrade.net/api.json and it'll return info based on
 	* `old`: Outdated.
 	* `cur`: Current.
 	* `pre`: Prerelease.
-	* `mob`: Mobile.
+	* `mob`: A mobile UA. `browser` and `version` will be `null`.
 	* `wtf`: An unparsable UA. `browser` and `version` will be `null`.
 
 ---

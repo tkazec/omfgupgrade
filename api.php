@@ -28,6 +28,10 @@ class OMFG {
 	);
 	
 	public static function parse($ua) {
+		if (preg_match('/Android|BlackBerry|Fennec|Mobile|NetFront|Nokia|Opera Mini|Opera Mobi|SymbianOS/', $ua)) {
+			return 'mobile';
+		}
+		
 		preg_match('/(Opera)\/9\.80.*Version\/(\d\d\.\d\d)/', $ua, $m) ||
 		preg_match('/(Opera) (\d\d\.\d\d)/', $ua, $m) ||
 		preg_match('/(Opera|Firefox|Chrome)\/(\d\d?\.\d\d?)/', $ua, $m);
@@ -50,7 +54,9 @@ class OMFG {
 		
 		$m = self::parse($ua);
 		
-		if ($m && isset(self::$list[$m[1]])) {
+		if ($m === 'mobile') {
+			$status = 'mob';
+		} else if ($m && isset(self::$list[$m[1]])) {
 			$name = $m[1];
 			$version = floatval($m[2]);
 			
