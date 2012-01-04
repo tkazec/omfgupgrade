@@ -109,7 +109,7 @@ if ($m && isset($list[$m[1]])) {
 		body {
 			background: #000;
 			color: #FFF;
-			font: 16px "Open Sans", sans-serif;
+			font: 16px "Open Sans", "DejaVu Sans", sans-serif;
 			margin: 0 auto;
 			text-align: center;
 			width: 1000px;
@@ -174,36 +174,40 @@ if ($m && isset($list[$m[1]])) {
 			<div id="nav-link">About</div>
 			<div id="nav-content">
 				<h2>What's this?</h2>
-				<p>A site that detects your browser version and offers suggestions based on it.</p>
+				<p>A fun little site to point outdated users in the right direction.</p>
 				
 				<h2>Who made it?</h2>
 				<p><a href="https://twitter.com/tkazec">@tkazec</a></p>
 				
-				<h2>What does it think I'm on?</h2>
+				<h2>What's it think I'm on?</h2>
 				<p><?php echo "{$browser} {$version}."; ?></p>
 				
 				<h2>Where's the source?</h2>
 				<p><a href="https://github.com/tkazec/omfgupgrade">GitHub</a>. The browser logos are from <a href="http://paulirish.com/2010/high-res-browser-icons/">Paul Irish</a>.</p>
 				
-				<h2>Okay, but what is this really?</h2>
-				<p>A quick and easy way to anger people using older browsers.</p>
+				<h2>Preview? API?</h2>
+				<p>Yes. See the <a href="https://github.com/tkazec/omfgupgrade#readme">README</a> for details.</p>
 			</div>
 		</div>
 		
 		<?php
 		echo "<h1>{$page[0]}</h1>";
 		
-		if ($page[1]) { echo "<p id='sub'>{$page[1]}</p>"; }
+		if ($page[1]) {
+			echo "<p id='sub'>{$page[1]}</p>";
+		}
 		
-		echo "<div id='list'>";
 		if ($page[2]) {
+			echo "<div id='list'>";
+			
 			foreach ($list as $name => $info) {
 				$bg = "style='background-image:url(\"images/{$name}.png\")'";
 				$class = $name === $page[2] ? "class='highlight' " : "";
 				echo "<a href='{$info['url']}' {$class}{$bg}>{$name} {$info['version']}</a>";
 			}
+			
+			echo "</div>";
 		}
-		echo "</div>";
 		?>
 	</body>
 </html>
