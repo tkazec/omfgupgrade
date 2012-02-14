@@ -38,11 +38,11 @@ if ($status === 'old') {
 	);
 }
 ?>
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 		<title>OMFG, upgrade!</title>
 		<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans">
 		<style>
