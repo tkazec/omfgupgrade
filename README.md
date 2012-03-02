@@ -2,17 +2,17 @@ A fun little site to point outdated users in the right direction based on their 
 
 ---
 
-**Basic usage**<br>
+**Basic usage**  
 Send the unlucky recipients of your rage to http://omfgupgrade.net.
 
-**Preview**<br>
+**Preview**  
 See what it looks like with a specific status, without changing your UA! Add the `status` parameter (see the API for more info):
 
 ```
 http://omfgupgrade.net?status=<old|cur|pre|mob|wtf>
 ```
 
-**API**<br>
+**API**  
 Send a request to http://omfgupgrade.net/api.json and it'll return info based on the request UA. If you need to use JSONP, just add the `callback` parameter. The response will be an object with the following data:
 
 * `name`: Browser name.
