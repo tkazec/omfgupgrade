@@ -48,7 +48,7 @@ class Tracker {
 	 * @link http://code.google.com/apis/analytics/docs/gaJS/changelog.html
 	 * @const string
 	 */
-	const VERSION = '5.2.2'; // As of 15.11.2011
+	const VERSION = '5.2.5'; // As of 25.02.2012
 	
 	
 	/**
@@ -126,7 +126,7 @@ class Tracker {
 	 * @param string $value
 	 */
 	public function setAccountId($value) {
-		if(!preg_match('/^UA-[0-9]*-[0-9]*$/', $value)) {
+		if(!preg_match('/^(UA|MO)-[0-9]*-[0-9]*$/', $value)) {
 			static::_raiseError('"' . $value . '" is not a valid Google Analytics account ID.', __METHOD__);
 		}
 		

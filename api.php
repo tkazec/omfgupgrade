@@ -15,12 +15,12 @@ class OMFG {
 			'pre' => 'http://www.opera.com/browser/next'
 		),
 		'Firefox' => array(
-			'version' => 10,
+			'version' => 11,
 			'url' => 'http://www.getfirefox.com',
 			'pre' => 'http://www.mozilla.com/firefox/channel'
 		),
 		'Chrome' => array(
-			'version' => 16,
+			'version' => 17,
 			'url' => 'http://www.google.com/chrome',
 			'pre' => 'http://www.google.com/landing/chrome/beta'
 		),
