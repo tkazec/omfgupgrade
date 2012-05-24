@@ -59,7 +59,7 @@ if ($status === 'old') {
 		body {
 			background: #000;
 			color: #FFF;
-			font: 16px "Open Sans", "DejaVu Sans", sans-serif;
+			font: 16px "Open Sans", sans-serif;
 			margin: 0 auto;
 			text-align: center;
 			width: 1000px;
@@ -116,7 +116,6 @@ if ($status === 'old') {
 			opacity: 1;
 		}
 		</style>
-		<script src="http://www.google-analytics.com/ga.js" async></script>
 		<script>
 		var _gaq = _gaq || [];
 		_gaq.push(
@@ -124,6 +123,12 @@ if ($status === 'old') {
 			["_setCustomVar", 1, "Browser Freshness", "<?php echo $freshness; ?>", 1],
 			["_trackPageview"]
 		);
+
+		(function () {
+			var ga = document.createElement("script"); ga.type = "text/javascript"; ga.async = true;
+			ga.src = ("https:" == document.location.protocol ? "https://ssl" : "http://www") + ".google-analytics.com/ga.js";
+			var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(ga, s);
+		})();
 		</script>
 	</head>
 	<body>

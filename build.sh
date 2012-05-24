@@ -1,9 +1,9 @@
 #!/bin/bash
-# $ bash build.sh containerdir googleanalyticsacc
+# $ bash build.sh containerdir ga-id
 
 SRCDIR="$( cd "$( dirname "$0" )" && pwd )"
 OUTDIR="$1/omfgupgrade"
-GA=$2
+GAID=$2
 
 rm -rf $OUTDIR
 cp -R $SRCDIR $OUTDIR
@@ -12,8 +12,8 @@ cd $OUTDIR
 rm build.sh
 rm -rf .git
 
-sed -i '' -e "s/##GA##/$GA/" index.php
-sed -i '' -e "s/UA--/$GA/" json.php
+sed -i '' -e "s/##GA##/$GAID/" index.php
+sed -i '' -e "s/UA--/$GAID/" json.php
 
 python - <<EOF
 import re, subprocess
