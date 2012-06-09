@@ -15,7 +15,7 @@ class OMFG {
 			'pre' => 'http://www.opera.com/browser/next'
 		),
 		'Firefox' => array(
-			'version' => 12,
+			'version' => 13,
 			'url' => 'http://www.getfirefox.com',
 			'pre' => 'http://www.mozilla.com/firefox/channel'
 		),

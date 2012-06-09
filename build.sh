@@ -1,8 +1,8 @@
 #!/bin/bash
-# $ bash build.sh containerdir ga-id
+# $ bash build.sh outdir ga-id
 
 SRCDIR="$( cd "$( dirname "$0" )" && pwd )"
-OUTDIR="$1/omfgupgrade"
+OUTDIR=$1
 GAID=$2
 
 rm -rf $OUTDIR
