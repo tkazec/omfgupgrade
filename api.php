@@ -15,17 +15,17 @@ class OMFG {
 			'pre' => 'http://www.opera.com/browser/next'
 		),
 		'Firefox' => array(
-			'version' => 13,
+			'version' => 15,
 			'url' => 'http://www.getfirefox.com',
 			'pre' => 'http://www.mozilla.com/firefox/channel'
 		),
 		'Chrome' => array(
-			'version' => 19,
+			'version' => 21,
 			'url' => 'http://www.google.com/chrome',
 			'pre' => 'http://www.google.com/landing/chrome/beta'
 		),
 		'Safari' => array(
-			'version' => 5.1,
+			'version' => 6.0,
 			'url' => 'http://www.apple.com/safari'
 		),
 		'Internet Explorer' => array(
