@@ -23,7 +23,7 @@ def css(m):
 	return "<style>" + proc.communicate(m.group(1))[0] + "</style>"
 
 def js(m):
-	proc = subprocess.Popen(["closure", "--language_in", "ECMASCRIPT5"], stdin=subprocess.PIPE, stdout=subprocess.PIPE)
+	proc = subprocess.Popen(["closure-compiler", "--language_in", "ECMASCRIPT5"], stdin=subprocess.PIPE, stdout=subprocess.PIPE)
 	return "<script>" + proc.communicate(m.group(1))[0] + "</script>"
 
 file = open("index.php").read()
